@@ -1,9 +1,10 @@
 ### Introduction
+This project's aim is to program a steering-wheel, so when the user turns it, the model of the CubeSat will also turn. It was used to demonstrate the ADCS subsystem of the satellite in an EXPO. The nRF24L01 module that we insert in the steering wheel communicates with the same module in the CubeSat model, so the motor driver in the model, makes it move in the correct direction.
 In order to make the model of the CubeSat turn around with the use of a steering wheel, we need a motor driver (Dual Motor Driver Module L298N), two Arduino, two nRF24L01 Transceiver Modules, an MPU6050, a power source, a reaction wheel and a steering wheel. 
 ### Testing
 I conducted tests to assure that the driver and the MPU6050 are working fine. 
 ##### Driver Testing 
-To test the driver I used this [script](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/testing_driver.ino?ref_type=heads) . If you want to test the driver you should use an Arduino, a motor driver, a reaction wheel and a power source. The wiring is as following:
+To test the driver I used [testing-driver](https://github.com/eleannapapaio/Steering-wheel/blob/main/testing_driver.ino) . If you want to test the driver you should use an Arduino, a motor driver, a reaction wheel and a power source. The wiring is as following:
 - +12V with the positive terminal of the power supply
 - common ground (GND driver with GND arduino) with the negative terminal
 - ENA with pin 9
@@ -14,18 +15,19 @@ To test the driver I used this [script](https://gitlab.com/acubesat/adcs/tif-202
 
 Assign 9V on power supply and 2A over voltage
 
-![Alt text](<test driver wiring.png>)
+![image](https://github.com/user-attachments/assets/8bc30a0b-ece1-42ea-b522-9cb390eeeb02)
 
 The driver works properly only if the reaction wheel turns on the on side, stops for a second and continue turning on the other side. 
 
 ##### MPU6050 Testing 
-In order to test that the MPU6050 (accelerometer/magnetometer/gyroscope) is working properly I used this [script](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new/test_MPU9250.ino?ref_type=heads) . The wiring is as following:
+In order to test that the MPU6050 (accelerometer/magnetometer/gyroscope) is working properly I used [test_MPU6050](https://github.com/eleannapapaio/Steering-wheel/blob/main/test_MPU9250.ino) . The wiring is as following:
 - Connect VCC to a 5V output pin on the Arduino.
 - Connect GND to a ground pin on the Arduino.
 - Connect SDA to the Arduino's analog pin 4 (A4).
 - Connect SCL to the Arduino's analog pin 5 (A5).
 
-![Alt text](<test_mpu6050_wiring.png>)
+![image](https://github.com/user-attachments/assets/46a04a84-ffe9-4c2f-8150-4d204e29c8e2)
+
 
 To check whether the MPU6050 is functioning properly I moved the component towards all axes (x-y-z). While moving the MPU6050, all the values in all three axes should change at the serial monitor. 
 If you use the script as it is, the only data that will be printed at your serial monitor, will be the magnetometer's values on x,y and z axes. 
@@ -64,7 +66,8 @@ As soon we assured that both the motor driver and the MPU6050 are fine, we conti
 	- Connect OUT1 with reaction wheel.
 	- Connect OUT2 with reaction wheel.
 	
-![Alt text](<wiring_reaction_wheel.png>)
+![image](https://github.com/user-attachments/assets/d4c54a20-d315-4411-b33a-b079a42c9d4d)
+
 
 ##### Transmitter wiring
 
@@ -80,11 +83,12 @@ NRF24L01 Module to Arduino connections:
 - MOSI to MOSI (SPI Master Out Slave In) on Arduino (usually Pin 11)
 - MISO to MISO (SPI Master In Slave Out) on Arduino (usually Pin 12)
 
-![Alt text](<transmitter_testing.png>)
+![image](https://github.com/user-attachments/assets/c3b285b2-1a56-4c8a-a870-8971d41f89ee)
+
 
 ##### Scripts 
 
-In order to test the nRF24L01 modules I used [this](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_receiver.ino?ref_type=heads) receiver script and [this](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_transmitter.ino?ref_type=heads) transmitter script. With these scripts you will not see the reaction wheel turning, yet we only test the functionality of the modules. If they both work fine, this is what we expect to see at the receiver's serial monitor:
+In order to test the nRF24L01 modules I used [test_receiver](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_receiver.ino?ref_type=heads) script and [test_transmitter](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_transmitter.ino?ref_type=heads) script. With these scripts you will not see the reaction wheel turning, yet we only test the functionality of the modules. If they both work fine, this is what we expect to see at the receiver's serial monitor:
 ```
 aaa
 Response=<data_received>
@@ -128,7 +132,8 @@ The wiring should be as following:
 	- Connect OUT1 with reaction wheel.
 	- Connect OUT2 with reaction wheel.
 
-![Alt text](<wiring_reaction_wheel.png>)
+![image](https://github.com/user-attachments/assets/63423550-5177-4ff9-badc-a2856593a82c)
+
 
 After you have done the wiring, you connect the arduino with the receiver script, with a USB cable.
 
@@ -150,7 +155,8 @@ Then you should also connect the three cables from the steering wheel, to the Ar
 - Yellow cable to the Arduino's 5V.
 - Black cable to GND.
 
-![Alt text](<transmitter_wiring.png>)
+![image](https://github.com/user-attachments/assets/fea5217a-abdd-40f8-8a51-69c84ab8e8c3)
+
 
 **You also connect the transmitter's script with the Arduino, with a USB cable. Make sure to select the appropriate PORT in both scripts and also select 9600 baud rate. 
 Double check that the wiring is correct and try to have the two nRF24L01 modules close to each other.**
