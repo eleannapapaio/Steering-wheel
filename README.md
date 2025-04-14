@@ -88,7 +88,7 @@ NRF24L01 Module to Arduino connections:
 
 ##### Scripts 
 
-In order to test the nRF24L01 modules I used [test_receiver](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_receiver.ino?ref_type=heads) script and [test_transmitter](https://gitlab.com/acubesat/adcs/tif-2021/Transmitter-Receiver/-/blob/timoni_new_new/test_transmitter.ino?ref_type=heads) script. With these scripts you will not see the reaction wheel turning, yet we only test the functionality of the modules. If they both work fine, this is what we expect to see at the receiver's serial monitor:
+In order to test the nRF24L01 modules I used [test_receiver](https://github.com/eleannapapaio/Steering-wheel/blob/main/test_receiver.ino) script and [test_transmitter](https://github.com/eleannapapaio/Steering-wheel/blob/main/test_transmitter.ino) script. With these scripts you will not see the reaction wheel turning, yet we only test the functionality of the modules. If they both work fine, this is what we expect to see at the receiver's serial monitor:
 ```
 aaa
 Response=<data_received>
